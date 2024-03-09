@@ -21,12 +21,12 @@ def index():
 def add_link():
     form = URLMapForm()
     if form.validate_on_submit():
-        url_link = URLMap(
+        urlmap = URLMap(
             original=form.original.data,
             short=form.short.data)
-        db.session.add(url_link)
+        db.session.add(urlmap)
         db.session.commit()
-    return render_template('index.html', form=form)
+    return render_template('index.html', form=form, new_url=urlmap.short)
 
 
 # @shortener.errorhandler(404)

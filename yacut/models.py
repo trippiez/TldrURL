@@ -13,13 +13,14 @@ class URLMap(db.Model):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.short_url = self.get_unique_short_id()
+        self.short = self.get_unique_short_id()
 
     def get_unique_short_id(self):
         characters = string.digits + string.ascii_letters
-        short_url = ''.join(choices(characters, k=16))
+        short = ''.join(choices(characters, k=16))
 
-        link = self.query.filter_by(short=short_url).first()
+        link = self.query.filter_by(short=short).first()
+
         if link:
             return self.get_unique_short_id()
-        return short_url
+        return short
