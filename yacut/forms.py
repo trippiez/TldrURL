@@ -13,4 +13,4 @@ class URLMapForm(FlaskForm):
         Optional(),
         Length(1, 16)]
     )
-    submit = SubmitField()
+    submit = SubmitField('Создать')

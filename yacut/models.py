@@ -1,8 +1,8 @@
+import string
 from datetime import datetime
+from random import choices
 
 from yacut import db
-import string
-from random import choices
 
 
 class URLMap(db.Model):
@@ -21,4 +21,5 @@ class URLMap(db.Model):
 
         link = self.query.filter_by(short=short_url).first()
         if link:
-            return self.get_unique_short_id
+            return self.get_unique_short_id()
+        return short_url
