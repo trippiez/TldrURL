@@ -1,0 +1,76 @@
+body {
+  background-color: #212529; /* темный фон */
+  color: #dcdcdc; /* менее яркий белый цвет текста */
+  font-family: Arial, sans-serif;
+}
+
+main {
+  height: 83vh; /* Делаем main на всю высоту окна браузера */
+  display: flex;
+  justify-content: center; /* Центрируем по горизонтали */
+  align-items: center; /* Центрируем по вертикали */
+}
+
+.bg-dark {
+  background-color: #343a40 !important;
+}
+
+.py-3 {
+  padding-bottom: 0 !important;
+}
+
+header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  color: #ff3333; /* красный цвет для логотипа */
+}
+
+.nav-link {
+  color: #dcdcdc !important; /* менее яркий белый цвет для ссылок */
+}
+
+.nav-link:hover {
+  color: #f8f9fa !important;
+}
+
+main {
+  padding-top: 80px;
+}
+
+h1 {
+  color: #ff3333;
+}
+
+.form-control {
+  background-color: #343a40; /* темный фон для инпутов формы */
+  color: #dcdcdc;
+  border-color: #343a40;
+}
+
+.form-control:focus {
+  background-color: #495057;
+  color: #dcdcdc;
+  border-color: #495057;
+}
+
+.btn-primary {
+  background-color: #b30000; /* красная кнопка */
+  border-color: #cc0000;
+  color: #ffffff; /* белый текст */
+  max-width: 75%; /* максимальная ширина 3/4 от ширины контейнера */
+  width: auto; /* автоматический расчет ширины */
+  opacity: 0.95; /* чуть тусклее */
+  margin: auto; /* центрирование кнопки */
+}
+
+.btn-primary:hover {
+  background-color: #cc0000; /* чуть тусклее при наведении */
+  border-color: #b30000;
+  opacity: 1; /* возвращаем обычную яркость при наведении */
+}
+
+footer {
+  background-color: #343a40; /* темный фон для футера */
+}
