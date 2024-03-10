@@ -5,7 +5,8 @@ body {
 }
 
 main {
-  height: 83vh;
+  height: 80vh;
+  padding-top: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,24 +24,12 @@ header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-brand {
-  color: #ff3333;
-}
-
 .nav-link {
   color: #dcdcdc !important;
 }
 
 .nav-link:hover {
   color: #f8f9fa !important;
-}
-
-main {
-  padding-top: 80px;
-}
-
-h1 {
-  color: #ff3333;
 }
 
 .form-control {
@@ -58,19 +47,10 @@ h1 {
 .btn-primary {
   background-color: #b30000;
   border-color: #cc0000;
-  color: #ffffff;
-  max-width: 75%;
-  width: auto;
-  opacity: 0.95;
-  margin: auto;
 }
 
 .btn-primary:hover {
   background-color: #cc0000;
   border-color: #b30000;
   opacity: 1;
-}
-
-footer {
-  background-color: #343a40;
 }
