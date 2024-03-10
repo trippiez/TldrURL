@@ -1,35 +1,50 @@
-from flask import render_template
+from flask import flash, redirect, render_template, request, url_for
 
 from . import app, db
 from .forms import URLMapForm
 from .models import URLMap
 
 
-# @shortener.route('/<short_url>')
-# def redirect_to_url():
-#     pass
-#     # return render_template('index.html')
+@app.route('/<short>')
+def redirect_to_url(short):
+    link = URLMap.query.filter_by(short=short).first()
+    return redirect(link.original)
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     form = URLMapForm()
+
+    if request.method == 'POST':
+        short = form.short.data
+
+        if short and URLMap.query.filter_by(short=short).first() is not None:
+            flash('Short URL already exists. Please choose another one.')
+            return redirect(url_for('index'))
+
+        if not short:
+            short = URLMap.get_unique_short_id()
+
+        if form.validate_on_submit():
+            link = URLMap(
+                original=form.original.data,
+                short=short
+            )
+            db.session.add(link)
+            db.session.commit()
+        return render_template('index.html', form=form, short=short)
     return render_template('index.html', form=form)
 
 
-@app.route('/add_link', methods=['POST'])
-def add_link():
-    form = URLMapForm()
-    if form.validate_on_submit():
-        urlmap = URLMap(
-            original=form.original.data,
-            short=form.short.data)
-        db.session.add(urlmap)
-        db.session.commit()
-    return render_template('index.html', form=form, new_url=urlmap.short)
+@app.route('/delete/<int:id>')
+def delete_link(id):
+    link = URLMap.query.get(id)
+    db.session.delete(link)
+    db.session.commit()
+    return "<h1>success deleted</h1>"
 
-
-# @shortener.errorhandler(404)
-# def page_not_found(error):
-#     return render_template('404.html'), 404
-#     return '<h1>Not Found</h1>'
+    # formdata = session.get('formdata', None)
+    # if formdata:
+    #     form = MyForm(MultiDict(formdata))
+    #     form.validate()
+    #     session.pop('formdata')

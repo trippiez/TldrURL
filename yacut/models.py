@@ -11,16 +11,7 @@ class URLMap(db.Model):
     short = db.Column(db.String(16), unique=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.short = self.get_unique_short_id()
-
-    def get_unique_short_id(self):
+    def get_unique_short_id():
         characters = string.digits + string.ascii_letters
         short = ''.join(choices(characters, k=16))
-
-        link = self.query.filter_by(short=short).first()
-
-        if link:
-            return self.get_unique_short_id()
         return short
