@@ -62,3 +62,14 @@ header {
 .red-color {
   color: red;
 }
+
+.error-button {
+  background-color: #495057; /* серый цвет кнопки */
+  border-color: #495057;
+}
+
+.error-button:hover {
+  background-color: #6c757d; /* темнее серого цвета при наведении */
+  border-color: #6c757d;
+  opacity: 1;
+}
