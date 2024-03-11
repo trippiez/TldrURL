@@ -29,7 +29,19 @@ def create_url():
     return jsonify({'url': url.to_dict()}), 201
 
 
-@app.route('/api/id/<string:short_id>', methods=['GET'])
+@app.route('/api/id/delete/<int:id>/', methods=['DELETE'])
+def delete_link(id):
+    url = URLMap.query.get(id)
+
+    if url is None:
+        raise InvalidAPIUsage("URL with the specified id was not found.", 404)
+
+    db.session.delete(url)
+    db.session.commit()
+    return '', 204
+
+
+@app.route('/api/id/<string:short_id>/', methods=['GET'])
 def get_url(short_id):
     url = URLMap.query.filter_by(short=short_id).first()
 

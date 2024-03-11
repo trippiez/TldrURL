@@ -7,9 +7,9 @@ from .models import URLMap
 
 @app.route('/<short>')
 def redirect_to_url(short):
-    link = URLMap.query.filter_by(short=short).first()
-    if link:
-        return redirect(link.original)
+    url = URLMap.query.filter_by(short=short).first()
+    if url:
+        return redirect(url.original)
     abort(404)
 
 
@@ -28,22 +28,14 @@ def index():
             return redirect(url_for('index'))
 
         if form.validate_on_submit():
-            link = URLMap(
+            url = URLMap(
                 original=form.original.data,
                 short=short
             )
-            db.session.add(link)
+            db.session.add(url)
             db.session.commit()
         return render_template('index.html', form=form, short=short)
     return render_template('index.html', form=form)
-
-
-@app.route('/delete/<int:id>')
-def delete_link(id):
-    link = URLMap.query.get(id)
-    db.session.delete(link)
-    db.session.commit()
-    return "<h1>success deleted</h1>"
 
     # formdata = session.get('formdata', None)
     # if formdata:
