@@ -29,3 +29,5 @@ class URLMap(db.Model):
         self.original = data['url']
         if 'custom_id' in data:
             self.short = data['custom_id']
+        else:
+            self.short = self.get_unique_short_id()

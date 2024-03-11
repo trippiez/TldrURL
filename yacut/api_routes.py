@@ -7,12 +7,19 @@ from .error_handlers import InvalidAPIUsage
 @app.route('/api/id/', methods=['POST'])
 def create_url():
     if not request.is_json:
-        raise InvalidAPIUsage('Request data must be in JSON format.')
+        raise InvalidAPIUsage('A JSON body is required to create a short link.')
 
     data = request.get_json()
 
     if 'url' not in data:
         raise InvalidAPIUsage('The request is missing required fields.')
+
+    if 'custom_id' in data:
+        if not data['custom_id'].isalnum():
+            raise InvalidAPIUsage("The 'custom_id' contains invalid values. Can only contain digits and ASCII letters.")
+
+        if data['custom_id'] and URLMap.query.filter_by(short=data['custom_id']).first() is not None:
+            raise InvalidAPIUsage('Short link is already exists.')
 
     url = URLMap()
     url.from_dict(data)
