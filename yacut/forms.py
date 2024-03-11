@@ -4,12 +4,12 @@ from wtforms.validators import URL, DataRequired, Length, Optional
 
 
 class URLMapForm(FlaskForm):
-    original = URLField(validators=[
-        Length(1, 256),
+    original = URLField('Long link', validators=[
+        Length(min=6, max=256, message='Url link is already short'),
         DataRequired(message='Required field'),
         URL(message='Invalid URL')]
     )
-    short = StringField(validators=[
+    short = StringField('Your short link option', validators=[
         Optional(),
         Length(1, 16)]
     )

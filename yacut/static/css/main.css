@@ -54,3 +54,11 @@ header {
   border-color: #b30000;
   opacity: 1;
 }
+
+.done-link {
+  text-decoration: none;
+}
+
+.red-color {
+  color: red;
+}

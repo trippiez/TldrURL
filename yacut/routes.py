@@ -19,7 +19,7 @@ def index():
         short = form.short.data
 
         if short and URLMap.query.filter_by(short=short).first() is not None:
-            flash('The proposed short link option already exists.')
+            flash('! The proposed short link option already exists.')
             return redirect(url_for('index'))
 
         if not short:
