@@ -1,5 +1,6 @@
+from flask import jsonify, render_template
+
 from . import app
-from flask import render_template, jsonify
 
 
 class InvalidAPIUsage(Exception):

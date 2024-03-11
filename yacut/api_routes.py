@@ -1,7 +1,8 @@
 from flask import jsonify, request
+
 from . import app, db
-from .models import URLMap
 from .error_handlers import InvalidAPIUsage
+from .models import URLMap
 
 
 @app.route('/api/id/', methods=['POST'])

@@ -1,4 +1,8 @@
 import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+openapi_file = os.path.join(BASE_DIR, 'openapi.yml')
 
 
 class Config(object):
