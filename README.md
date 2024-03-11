@@ -22,39 +22,39 @@ YaCut provides a simple user interface for shortening links and an API for integ
 - SQLAlchemy - ORM for working with the database.
 - SQLite - database for storing links.
 - HTML/CSS - for the user interface.
-- Swagger - for documentation and API visualization.
+- Redoc - for documentation and API visualization.
 
 ## Installation and Usage
 
-Клонировать репозиторий и перейти в него в командной строке:
+Clone the repository and navigate to it on the command line:
 
 ```
-git clone 
+git clone
 ```
 
 ```
-cd yacut
+CD Yakut
 ```
 
-Cоздать и активировать виртуальное окружение:
+Create and activate a virtual environment:
 
 ```
 python3 -m venv venv
 ```
 
-* Если у вас Linux/macOS
+*If you have Linux/macOS
 
-    ```
-    source venv/bin/activate
-    ```
+      ```
+      source venv/bin/activate
+      ```
 
-* Если у вас windows
+*If you have windows
 
-    ```
-    source venv/scripts/activate
-    ```
+      ```
+      source code venv/scripts/activate
+      ```
 
-Установить зависимости из файла requirements.txt:
+Install depending on the require.txt file:
 
 ```
 python3 -m pip install --upgrade pip
