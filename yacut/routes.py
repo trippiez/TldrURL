@@ -24,7 +24,8 @@ def index():
             short = URLMap.get_unique_short_id()
 
         if short and URLMap.query.filter_by(short=short).first() is not None:
-            flash('Short link is already exists.')
+            flash('Предложенный вариант короткой ссылки уже существует.')
+            # flash('Short link is already exists.')
             return redirect(url_for('index'))
 
         if form.validate_on_submit():

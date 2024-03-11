@@ -29,9 +29,6 @@
                 {{ form.short(class="form-control form-control-lg py-2 mb-3",
                 placeholder=form.short.label.text, id="form-link") }}
                 <p>
-                  {% with messages = get_flashed_messages() %} {% if
-                    messages %} {% for message in messages %} <div class="red-color">{{ message }}</div> {% endfor %}
-                    {% endif %} {% endwith %}
                 </p>
               </div>
               {{ form.submit(class="btn btn-primary") }}
@@ -50,13 +47,16 @@
           <div class="text-center">
             <h5>Your new link is ready:</h5>
             <a
-              href="{{ url_for('redirect_to_url', short=short, _external=True) }}"
-              target="_blank"
-              class="done-link"
-              >{{ url_for('redirect_to_url', short=short, _external=True) }}</a
+            href="{{ url_for('redirect_to_url', short=short, _external=True) }}"
+            target="_blank"
+            class="done-link"
+            >{{ url_for('redirect_to_url', short=short, _external=True) }}</a
             >
           </div>
           {% endif %}
+          {% with messages = get_flashed_messages() %} {% if
+            messages %} {% for message in messages %} <div class="red-color">{{ message }}</div> {% endfor %}
+          {% endif %} {% endwith %}
         </div>
         <div class="col-sm"></div>
       </div>
