@@ -8,7 +8,9 @@ endblock %} {% block content %}
       <br />
       Try refreshing the page now or via a few minutes.
     </p>
-    <a href="/" class="btn btn-primary error-button">Вернуться на главную</a>
+    <a href="{{ url_for('index') }}" class="btn btn-primary error-button"
+      >Вернуться на главную</a
+    >
   </section>
 </main>
 {% endblock %}
