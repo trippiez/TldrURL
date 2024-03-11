@@ -1,4 +1,4 @@
-from flask import flash, redirect, render_template, request, url_for
+from flask import abort, flash, redirect, render_template, request, url_for
 
 from . import app, db
 from .forms import URLMapForm
@@ -8,7 +8,9 @@ from .models import URLMap
 @app.route('/<short>')
 def redirect_to_url(short):
     link = URLMap.query.filter_by(short=short).first()
-    return redirect(link.original)
+    if link:
+        return redirect(link.original)
+    abort(404)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -18,12 +20,12 @@ def index():
     if request.method == 'POST':
         short = form.short.data
 
-        if short and URLMap.query.filter_by(short=short).first() is not None:
-            flash('! The proposed short link option already exists.')
-            return redirect(url_for('index'))
-
         if not short:
             short = URLMap.get_unique_short_id()
+
+        if short and URLMap.query.filter_by(short=short).first() is not None:
+            flash('! Short link is already exists.')
+            return redirect(url_for('index'))
 
         if form.validate_on_submit():
             link = URLMap(
