@@ -44,15 +44,15 @@ python3 -m venv venv
 
 *If you have Linux/macOS
 
-      ```
-      source venv/bin/activate
-      ```
+```
+source venv/bin/activate
+```
 
 *If you have windows
 
-      ```
-      source code venv/scripts/activate
-      ```
+```
+source code venv/scripts/activate
+```
 
 Install depending on the require.txt file:
 
