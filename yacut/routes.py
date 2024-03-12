@@ -1,45 +1,29 @@
-from flask import abort, flash, redirect, render_template, request, url_for
+from flask import flash, redirect, render_template
 
-from . import app, db
+from . import app
 from .forms import URLMapForm
+from .error_handlers import ValidationError, ShortGenerateError
 from .models import URLMap
-
-
-@app.route('/<short>')
-def redirect_to_url(short):
-    url = URLMap.query.filter_by(short=short).first()
-    if url:
-        return redirect(url.original)
-    abort(404)
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = URLMapForm()
-
-    if request.method == 'POST':
-        short = form.short.data
-
-        if not short:
-            short = URLMap.get_unique_short_id()
-
-        if short and URLMap.query.filter_by(short=short).first() is not None:
-            flash('Предложенный вариант короткой ссылки уже существует.')
-            # flash('Short link is already exists.')
-            return redirect(url_for('index'))
-
-        if form.validate_on_submit():
-            url = URLMap(
-                original=form.original.data,
-                short=short
-            )
-            db.session.add(url)
-            db.session.commit()
-        return render_template('index.html', form=form, short=short)
+    if not form.validate_on_submit():
+        return render_template('index.html', form=form)
+    try:
+        return render_template(
+            'index.html', form=form,
+            short_link=URLMap.create(
+                original=form.original_link.data,
+                short=form.data.get('custom_id')
+            ).get_short_link()
+        )
+    except (ValidationError, ShortGenerateError) as error:
+        flash(str(error))
     return render_template('index.html', form=form)
 
-    # formdata = session.get('formdata', None)
-    # if formdata:
-    #     form = MyForm(MultiDict(formdata))
-    #     form.validate()
-    #     session.pop('formdata')
+
+@app.route('/<string:short>')
+def redirect_to_url(short):
+    return redirect(URLMap.get_original_or_404(short))

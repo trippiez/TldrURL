@@ -1,6 +1,6 @@
 from flask import jsonify, render_template
 
-from . import app
+from . import app, db
 
 
 class InvalidAPIUsage(Exception):
@@ -28,4 +28,13 @@ def page_not_found(error):
 
 @app.errorhandler(500)
 def internal_error(error):
+    db.session.rollback()
     return render_template('errors/500.html'), 500
+
+
+class ShortGenerateError(Exception):
+    pass
+
+
+class ValidationError(Exception):
+    pass
