@@ -8,7 +8,7 @@ from settings import Config, openapi_file
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'TQDM'
+app.config.from_object(Config)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db, render_as_batch=True)
