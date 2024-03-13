@@ -1,6 +1,6 @@
 from flask import jsonify, request
 
-from . import app, db
+from yacut import app, db
 from .constants import (MISSING_BODY_ERROR, MISSING_URL_FIELD_ERROR,
                         NOT_FOUND_ERROR, URL_WITH_ID_NOT_FOUND_ERROR)
 from .error_handlers import InvalidAPIUsage, ValidationError

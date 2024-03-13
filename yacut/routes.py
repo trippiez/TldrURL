@@ -1,6 +1,6 @@
 from flask import flash, redirect, render_template
 
-from . import app
+from yacut import app
 from .error_handlers import ShortError, ValidationError
 from .forms import URLMapForm
 from .models import URLMap
