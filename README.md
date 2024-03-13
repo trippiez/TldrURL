@@ -72,5 +72,5 @@ flask run
 
 ## Contacts
 
-Backend by: trippiez
+Backend by: Eric Ivanov
 - e-mail: ldqfv@mail.ru
