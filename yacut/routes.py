@@ -13,7 +13,8 @@ def index():
         return render_template('index.html', form=form)
     try:
         return render_template(
-            'index.html', form=form,
+            'index.html',
+            form=form,
             short_link=URLMap.create(
                 original=form.original_link.data,
                 short=form.data.get('custom_id')

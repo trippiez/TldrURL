@@ -29,10 +29,11 @@ def create_url():
 
     try:
         return (
-            jsonify(
-                URLMap.create(
-                    data['url'], data.get('custom_id'), to_validate=True
-                ).to_dict()
+            jsonify(URLMap.create(
+                data['url'],
+                data.get('custom_id'),
+                to_validate=True
+            ).to_dict()
             ),
             201
         )

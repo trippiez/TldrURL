@@ -33,7 +33,7 @@ git clone
 ```
 
 ```
-CD Yakut
+cd Yakut
 ```
 
 Create and activate a virtual environment:
@@ -63,3 +63,14 @@ python3 -m pip install --upgrade pip
 ```
 pip install -r requirements.txt
 ```
+
+Run the script:
+
+```
+flask run
+```
+
+## Contacts
+
+Backend by: trippiez
+- e-mail: ldqfv@mail.ru
