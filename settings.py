@@ -1,8 +1,8 @@
 import os
-from pathlib import Path
+# from pathlib import Path
 
-FWQ_DIR = Path(__file__).resolve().parent
-openapi_file = os.path.join(FWQ_DIR, 'openapi.yml')
+# FWQ_DIR = Path(__file__).resolve().parent
+# openapi_file = os.path.join(FWQ_DIR, 'openapi.yml')
 
 
 class Config(object):
