@@ -5,10 +5,10 @@ from datetime import datetime
 from flask import url_for
 
 from . import db
-from .constants import (ASCII_NUM_REGEX, INVALID_CHARACTERS,
+from .constants import (INVALID_CHARACTERS,
                         MAX_ORIGINAL_LENGTH, MAX_SHORT_LENGTH,
                         ORIGINAL_LENGTH_EXCEEDED, SHORT_ID_ATTEMPTS,
-                        SHORT_LENGTH, SHORT_LENGTH_EXCEEDED, SHORT_LINK_EXISTS,
+                        SHORT_LENGTH, SHORT_LINK_EXISTS,
                         SHORT_REGEX, UNIQUE_SHORT_GENERATE_FAILED,
                         VALID_SYMBOLS)
 from .error_handlers import ShortError, ValidationError
@@ -65,21 +65,3 @@ class URLMap(db.Model):
         db.session.add(urlmap)
         db.session.commit()
         return urlmap
-
-    @staticmethod
-    def validate_input(original, short):
-        original_len = len(original)
-        if original_len > MAX_ORIGINAL_LENGTH:
-            raise ValidationError(ORIGINAL_LENGTH_EXCEEDED)
-        if short:
-            URLMap.validate_short(short)
-
-    @staticmethod
-    def validate_short(short):
-        short_len = len(short)
-        if short_len > MAX_SHORT_LENGTH:
-            raise ValidationError(SHORT_LENGTH_EXCEEDED)
-        if not re.match(ASCII_NUM_REGEX, short):
-            raise ValidationError(INVALID_CHARACTERS)
-        if URLMap.query.filter_by(short=short).first():
-            raise ValidationError(SHORT_LINK_EXISTS)
