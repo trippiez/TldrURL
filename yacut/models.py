@@ -5,10 +5,9 @@ from datetime import datetime
 from flask import url_for
 
 from . import db
-from .constants import (INVALID_CHARACTERS,
-                        MAX_ORIGINAL_LENGTH, MAX_SHORT_LENGTH,
-                        ORIGINAL_LENGTH_EXCEEDED, SHORT_ID_ATTEMPTS,
-                        SHORT_LENGTH, SHORT_LINK_EXISTS,
+from .constants import (INVALID_CHARACTERS, MAX_ORIGINAL_LENGTH,
+                        MAX_SHORT_LENGTH, ORIGINAL_LENGTH_EXCEEDED,
+                        SHORT_ID_ATTEMPTS, SHORT_LENGTH, SHORT_LINK_EXISTS,
                         SHORT_REGEX, UNIQUE_SHORT_GENERATE_FAILED,
                         VALID_SYMBOLS)
 from .error_handlers import ShortError, ValidationError
