@@ -1,15 +1,16 @@
 import random
 import re
 from datetime import datetime
-from string import ascii_letters, digits
 
 from flask import url_for
 
 from . import db
-from .constants import (INVALID_CHARACTERS, MAX_ORIGINAL_LENGTH,
-                        MAX_SHORT_LENGTH, ORIGINAL_LENGTH_EXCEEDED,
-                        SHORT_ID_ATTEMPTS, SHORT_LENGTH_EXCEEDED,
-                        SHORT_LINK_EXISTS, UNIQUE_SHORT_GENERATE_FAILED)
+from .constants import (ASCII_NUM_REGEX, INVALID_CHARACTERS,
+                        MAX_ORIGINAL_LENGTH, MAX_SHORT_LENGTH,
+                        ORIGINAL_LENGTH_EXCEEDED, SHORT_ID_ATTEMPTS,
+                        SHORT_LENGTH, SHORT_LENGTH_EXCEEDED, SHORT_LINK_EXISTS,
+                        SHORT_REGEX, UNIQUE_SHORT_GENERATE_FAILED,
+                        VALID_SYMBOLS)
 from .error_handlers import ShortGenerateError, ValidationError
 
 
@@ -29,10 +30,7 @@ class URLMap(db.Model):
         return url_for('redirect_to_url', short=self.short, _external=True)
 
     @staticmethod
-    def get_unique_short_id(
-        symbols=ascii_letters + digits,
-        length=6
-    ):
+    def get_unique_short_id(symbols=VALID_SYMBOLS, length=SHORT_LENGTH):
         for _ in range(SHORT_ID_ATTEMPTS):
             short_link = ''.join(random.choices(symbols, k=length))
             if not URLMap.get_urlmap_by_short(short=short_link):
@@ -51,13 +49,13 @@ class URLMap(db.Model):
     def create(original, short=None, to_validate=False):
         if to_validate:
             original_len = len(original)
-            if original_len > 256:
+            if original_len > MAX_ORIGINAL_LENGTH:
                 raise ValidationError(ORIGINAL_LENGTH_EXCEEDED)
             if short:
                 short_len = len(short)
-                if short_len > 16:
+                if short_len > MAX_SHORT_LENGTH:
                     raise ValidationError(INVALID_CHARACTERS)
-                if not re.match((rf'^[{re.escape(ascii_letters + digits)}]+$'), short):
+                if not re.match(SHORT_REGEX, short):
                     raise ValidationError(INVALID_CHARACTERS)
                 if URLMap.get_urlmap_by_short(short):
                     raise ValidationError(SHORT_LINK_EXISTS)
@@ -81,7 +79,7 @@ class URLMap(db.Model):
         short_len = len(short)
         if short_len > MAX_SHORT_LENGTH:
             raise ValidationError(SHORT_LENGTH_EXCEEDED)
-        if not re.match(r'^[a-zA-Z0-9]+$', short):
+        if not re.match(ASCII_NUM_REGEX, short):
             raise ValidationError(INVALID_CHARACTERS)
         if URLMap.query.filter_by(short=short).first():
             raise ValidationError(SHORT_LINK_EXISTS)

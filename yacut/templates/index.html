@@ -51,15 +51,13 @@
                 <span style="color:red">{{ message }}</span>
               {% endfor %}
             {% endwith %}
-            <h5>
               {% if short_link %}
-                Ваша короткая ссылка готова
-                <a href="{{ short_link }}">{{ short_link }}</a>
+                <h5>Ваша короткая ссылка готова:</h5>
+                <a href="{{ short_link }}" target='_blank'>{{ short_link }}</a>
               {% endif %}
-            </h5>
+          </div>
         </div>
         <div class="col-sm"></div>
-      </div>
     </div>
   </section>
 </main>

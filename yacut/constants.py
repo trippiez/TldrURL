@@ -1,3 +1,6 @@
+import re
+from string import ascii_letters, digits
+
 # models.py
 SHORT_LENGTH_EXCEEDED = 'Длина короткой ссылки превышает 16 символов'
 INVALID_CHARACTERS = 'Указано недопустимое имя для короткой ссылки'
@@ -7,6 +10,10 @@ UNIQUE_SHORT_GENERATE_FAILED = 'Не удалось создать уникал�
 MAX_ORIGINAL_LENGTH = 256
 MAX_SHORT_LENGTH = 16
 SHORT_ID_ATTEMPTS = 3
+SHORT_LENGTH = 6
+VALID_SYMBOLS = ascii_letters + digits
+SHORT_REGEX = (rf'^[{re.escape(ascii_letters + digits)}]+$')
+ASCII_NUM_REGEX = r'^[a-zA-Z0-9]+$'
 
 
 # routes.py & api_routes.py

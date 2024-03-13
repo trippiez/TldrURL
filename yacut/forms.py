@@ -1,11 +1,9 @@
-import re
-from string import ascii_letters, digits
-
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, URLField
 from wtforms.validators import (URL, DataRequired, Length, Optional, Regexp,
                                 ValidationError)
 
+from .constants import SHORT_REGEX
 from .models import URLMap
 
 
@@ -18,7 +16,7 @@ class URLMapForm(FlaskForm):
     custom_id = URLField('Your short link option.', validators=[
         Optional(strip_whitespace=False),
         Length(1, 16),
-        Regexp((rf'^[{re.escape(ascii_letters + digits)}]+$'), message='Проверьте формат короткой ссылки')]
+        Regexp(SHORT_REGEX, message='Проверьте формат короткой ссылки')]
     )
     submit = SubmitField('Create')
 
