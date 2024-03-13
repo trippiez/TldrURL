@@ -1,8 +1,8 @@
 from flask import flash, redirect, render_template
 
 from . import app
+from .error_handlers import ShortGenerateError, ValidationError
 from .forms import URLMapForm
-from .error_handlers import ValidationError, ShortGenerateError
 from .models import URLMap
 
 

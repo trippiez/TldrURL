@@ -3,7 +3,9 @@ from string import ascii_letters, digits
 
 from flask_wtf import FlaskForm
 from wtforms import SubmitField, URLField
-from wtforms.validators import URL, DataRequired, Length, Optional, Regexp, ValidationError
+from wtforms.validators import (URL, DataRequired, Length, Optional, Regexp,
+                                ValidationError)
+
 from .models import URLMap
 
 

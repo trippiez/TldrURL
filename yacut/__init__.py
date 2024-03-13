@@ -14,4 +14,4 @@ migrate = Migrate(app, db, render_as_batch=True)
 redoc = Redoc(app, openapi_file)
 
 
-from . import api_routes, error_handlers, models, routes
+from . import api_routes, constants, error_handlers, models, routes

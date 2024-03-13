@@ -1,6 +1,8 @@
 from flask import jsonify, request
 
 from . import app, db
+from .constants import (MISSING_BODY_ERROR, MISSING_URL_FIELD_ERROR,
+                        NOT_FOUND_ERROR, URL_WITH_ID_NOT_FOUND_ERROR)
 from .error_handlers import InvalidAPIUsage, ValidationError
 from .models import URLMap
 
@@ -10,8 +12,7 @@ def get_original_link(short_id):
     original = URLMap.get_urlmap_by_short(short=short_id)
 
     if original is None:
-        raise InvalidAPIUsage("Указанный id не найден", 404)
-        # raise InvalidAPIUsage("URL with the specified 'short' was not found.", 404)
+        raise InvalidAPIUsage(NOT_FOUND_ERROR, 404)
 
     return jsonify(original.original_to_dict()), 200
 
@@ -21,12 +22,11 @@ def create_url():
     data = request.get_json()
 
     if data is None:
-        raise InvalidAPIUsage('Отсутствует тело запроса')
-        # raise InvalidAPIUsage('A JSON body is required to create a short link.')
+        raise InvalidAPIUsage(MISSING_BODY_ERROR)
 
     if 'url' not in data:
-        raise InvalidAPIUsage('"url" является обязательным полем!')
-        # raise InvalidAPIUsage('The request is missing required fields.')
+        raise InvalidAPIUsage(MISSING_URL_FIELD_ERROR)
+
     try:
         return (
             jsonify(
@@ -45,7 +45,7 @@ def delete_link(id):
     url = URLMap.query.get(id)
 
     if url is None:
-        raise InvalidAPIUsage("URL with the specified id was not found.", 404)
+        raise InvalidAPIUsage(URL_WITH_ID_NOT_FOUND_ERROR, 404)
 
     db.session.delete(url)
     db.session.commit()
