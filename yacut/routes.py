@@ -1,7 +1,7 @@
 from flask import flash, redirect, render_template
 
 from . import app
-from .error_handlers import ShortGenerateError, ValidationError
+from .error_handlers import ShortError, ValidationError
 from .forms import URLMapForm
 from .models import URLMap
 
@@ -19,7 +19,7 @@ def index():
                 short=form.data.get('custom_id')
             ).get_short_link()
         )
-    except (ValidationError, ShortGenerateError) as error:
+    except (ValidationError, ShortError) as error:
         flash(str(error))
     return render_template('index.html', form=form)
 

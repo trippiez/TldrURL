@@ -11,7 +11,7 @@ from .constants import (ASCII_NUM_REGEX, INVALID_CHARACTERS,
                         SHORT_LENGTH, SHORT_LENGTH_EXCEEDED, SHORT_LINK_EXISTS,
                         SHORT_REGEX, UNIQUE_SHORT_GENERATE_FAILED,
                         VALID_SYMBOLS)
-from .error_handlers import ShortGenerateError, ValidationError
+from .error_handlers import ShortError, ValidationError
 
 
 class URLMap(db.Model):
@@ -35,7 +35,7 @@ class URLMap(db.Model):
             short_link = ''.join(random.choices(symbols, k=length))
             if not URLMap.get_urlmap_by_short(short=short_link):
                 return short_link
-        raise ShortGenerateError(UNIQUE_SHORT_GENERATE_FAILED)
+        raise ShortError(UNIQUE_SHORT_GENERATE_FAILED)
 
     @staticmethod
     def get_original_or_404(short):

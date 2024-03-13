@@ -32,7 +32,7 @@ def internal_error(error):
     return render_template('errors/500.html'), 500
 
 
-class ShortGenerateError(Exception):
+class ShortError(Exception):
     pass
 
 
