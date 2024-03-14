@@ -14,17 +14,11 @@ class URLMap(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def original_to_dict(self):
-        lt_output = {
-            'url': self.original
-        }
-        return lt_output
+        return {'url': self.original}
 
     def to_dict(self):
-        lt_output = {
-            'url': self.original,
-            'short_link': self.get_short_link()
-        }
-        return lt_output
+        return {'url': self.original,
+                'short_link': self.get_short_link()}
 
     def get_short_link(self):
         return url_for('redirect_to_url', short=self.short, _external=True)
