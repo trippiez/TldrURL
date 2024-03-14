@@ -13,7 +13,6 @@ from .models import URLMap
 
 
 class URLMapUtils:
-    @staticmethod
     def get_unique_short_id(symbols=VALID_SYMBOLS, length=SHORT_LENGTH):
         for _ in range(SHORT_ID_ATTEMPTS):
             short_link = ''.join(random.choices(symbols, k=length))
@@ -21,15 +20,12 @@ class URLMapUtils:
                 return short_link
         raise ShortError(UNIQUE_SHORT_GENERATE_FAILED)
 
-    @staticmethod
     def get_original_or_404(short):
         return URLMap.query.filter_by(short=short).first_or_404().original
 
-    @staticmethod
     def get_urlmap_by_short(short):
         return URLMap.query.filter_by(short=short).first()
 
-    @staticmethod
     def create(original, short=None, to_validate=False):
         if to_validate:
             original_len = len(original)
