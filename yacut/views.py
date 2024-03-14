@@ -1,9 +1,10 @@
 from flask import flash, redirect, render_template
 
 from yacut import app
+
 from .error_handlers import ShortError, ValidationError
 from .forms import URLMapForm
-from .models import URLMap
+from .utils import URLMapUtils
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -15,7 +16,7 @@ def index():
         return render_template(
             'index.html',
             form=form,
-            short_link=URLMap.create(
+            short_link=URLMapUtils.create(
                 original=form.original_link.data,
                 short=form.data.get('custom_id')
             ).get_short_link()
@@ -27,4 +28,4 @@ def index():
 
 @app.route('/<string:short>')
 def redirect_to_url(short):
-    return redirect(URLMap.get_original_or_404(short))
+    return redirect(URLMapUtils.get_original_or_404(short))

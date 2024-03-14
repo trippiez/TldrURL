@@ -2,7 +2,6 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_redoc import Redoc
 from flask_sqlalchemy import SQLAlchemy
-
 from settings import Config, openapi_file
 
 app = Flask(__name__)

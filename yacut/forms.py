@@ -8,7 +8,7 @@ from .constants import (INVALID_CHARACTERS, INVALID_URL_MESSAGE,
                         REQUIRED_FIELD_MESSAGE, SHORT_LENGTH,
                         SHORT_LINK_EXISTS, SHORT_LINK_OPTION_LABEL,
                         SHORT_REGEX, SUBMIT_LABEL, URL_LENGTH_MESSAGE)
-from .models import URLMap
+from .utils import URLMapUtils
 
 
 class URLMapForm(FlaskForm):
@@ -25,5 +25,5 @@ class URLMapForm(FlaskForm):
     submit = SubmitField(SUBMIT_LABEL)
 
     def validate_custom_id(self, field):
-        if field.data and URLMap.get_urlmap_by_short(field.data):
+        if field.data and URLMapUtils.get_urlmap_by_short(field.data):
             raise ValidationError(SHORT_LINK_EXISTS)
