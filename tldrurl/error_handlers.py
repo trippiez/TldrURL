@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from flask import jsonify, render_template
 
-from yacut import app, db
+from tldrurl import app, db
 
 
 class InvalidAPIUsage(Exception):

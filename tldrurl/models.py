@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import url_for
 
-from yacut import db
+from tldrurl import db
 
 from .constants import MAX_ORIGINAL_LENGTH, MAX_SHORT_LENGTH
 

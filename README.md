@@ -1,10 +1,10 @@
-# YaCut - Link Shortening Service
+# TldrURL - Link Shortening Service
 
-YaCut is a service that allows shortening long URLs into short, easy-to-manage links. The project is designed to facilitate the exchange of links, making them more convenient and memorable.
+TldrURL is a service that allows shortening long URLs into short, easy-to-manage links. The project is designed to facilitate the exchange of links, making them more convenient and memorable.
 
 ## Project Description
 
-YaCut provides a simple user interface for shortening links and an API for integration with other applications. It offers the following key features:
+TldrURL provides a simple user interface for shortening links and an API for integration with other applications. It offers the following key features:
 
 - Generating short links and associating them with original long URLs.
 - Redirecting to the original address when accessing short links.
@@ -33,7 +33,7 @@ git clone
 ```
 
 ```
-cd Yakut
+cd tldrurl
 ```
 
 Create and activate a virtual environment:

@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from flask import jsonify, request
 
-from yacut import app, db
+from tldrurl import app, db
 
 from .constants import (MISSING_BODY_ERROR, MISSING_URL_FIELD_ERROR,
                         NOT_FOUND_ERROR, URL_WITH_ID_NOT_FOUND_ERROR)

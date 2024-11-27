@@ -1,7 +1,7 @@
 import random
 import re
 
-from yacut import db
+from tldrurl import db
 
 from .constants import (INVALID_CHARACTERS, MAX_ORIGINAL_LENGTH,
                         MAX_SHORT_LENGTH, ORIGINAL_LENGTH_EXCEEDED,

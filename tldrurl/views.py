@@ -1,6 +1,6 @@
 from flask import flash, redirect, render_template
 
-from yacut import app
+from tldrurl import app
 
 from .error_handlers import ShortError, ValidationError
 from .forms import URLMapForm
