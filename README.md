@@ -1,6 +1,6 @@
 # TldrURL - Link Shortening Service
 
-TldrURL is a service that allows shortening long URLs into short, easy-to-manage links. The project is designed to facilitate the exchange of links, making them more convenient and memorable.
+TldrURL ("Too Long; Didn't Read") is a service that allows shortening long URLs into short, easy-to-manage links. The project is designed to facilitate the exchange of links, making them more convenient and memorable.
 
 ## Project Description
 
